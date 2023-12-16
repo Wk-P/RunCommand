@@ -7,12 +7,15 @@ do
     do
         labels=$(echo 123321 | sudo -S docker node inspect --format '{{ json .Spec.Labels }}' "$node_id")
         role=$(echo 123321 | sudo -S docker node inspect --format '{{ json .Spec.Role }}' "$node_id")
-        if [ "$labels" == '{}' ] && [ "$role" == "worker" ]
+        echo "$labels"
+        echo "$role"
+        if [ "$labels" == "{}" ] && [ "$role" == "worker" ]
         then
             echo 123321 | sudo -S docker node update --label-add 'node=worker' "$node_id"
+            
         # else
             # echo node id is $node_id
         fi
     done
     sleep 5
-done > label.log &
+done
