@@ -11,5 +11,5 @@ while true; do
             sudo docker node rm "$id"
         fi
     done
-done
+done > deldn.log &
 
